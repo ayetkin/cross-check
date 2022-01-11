@@ -1,0 +1,22 @@
+# Server config
+server:
+  host: 0.0.0.0
+  port: 9200
+
+# Postgresql config
+pgsql:
+  host: 127.0.0.1
+  user: checkuser
+  password: EalchOliCK_12!
+  port: 5432
+  database: postgres
+  timeout: 10
+
+# Mysql config
+mysql:
+  host: 127.0.0.1
+  user: checkuser
+  password: CZfoj7DKcP
+  port: 3306
+  database: mysql
+  timeout: 10

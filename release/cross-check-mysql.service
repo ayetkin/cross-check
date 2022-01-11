@@ -1,0 +1,13 @@
+[Unit]
+Description=Cross Check
+Documentation=https://gitlab.hepsiburada.com/devops-sysops/cross-check
+Wants=network-online.target
+After=network-online.target
+AssertFileIsExecutable=/usr/local/bin/cross-check
+
+[Service]
+ExecStart=/usr/local/bin/cross-check mysql --config /etc/cross-check/config.yaml
+Restart=always
+LimitNOFILE=65536
+TimeoutStopSec=infinity
+SendSIGKILL=no
