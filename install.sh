@@ -9,7 +9,7 @@ remove(){
   rm -rf /etc/systemd/system/cross-check.service
   echo -e "Deleting cross check binary..." && sleep 2 & spinner
   rm -rf /usr/local/bin/cross-check
-  echo -e ":::::::: Installing done ::::::::"
+  echo -e ":::::::: Removing done ::::::::"
 }
 
 update () {
@@ -88,6 +88,7 @@ spinner()
 }
 
 #Copy service config and application
+echo -e ":::::::: Cross Check Installer ::::::::" && sleep 1
 
 if [ $1 == "mysql" ]; then
   echo -e ":::::::: Cross Check MYSQL Installing started ::::::::" && sleep 1
@@ -102,6 +103,5 @@ elif [ $1 == "remove" ]; then
   echo -e ":::::::: Cross Check Uninstalling ::::::::" && sleep 1
   remove
 else
-  echo -e "Please select an argument. (mysql, pgsql, update, delete)" && exit 1
+  echo -e "Please select an argument. (mysql, pgsql, update, delete)\nExample: ./install.sh mysql" && exit 1
 fi
-
