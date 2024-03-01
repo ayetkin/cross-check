@@ -10,6 +10,5 @@ func Router() *mux.Router{
 
 	router.HandleFunc("/", middleware.Home)
 
-
 	return router
 }
