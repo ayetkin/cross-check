@@ -9,7 +9,7 @@ remove(){
   rm -rf /etc/systemd/system/cross-check.service
   echo -e "Deleting cross check binary..." && sleep 2 & spinner
   rm -rf /usr/local/bin/cross-check
-  echo -e ":::::::: Installing done ::::::::"
+  echo -e ":::::::: Removing done ::::::::"
 }
 
 update () {
@@ -66,28 +66,29 @@ install () {
   systemctl start cross-check
   # shellcheck disable=SC2181
   if [ $? -ne 0 ]; then
-      echo "Error while starting service"
-      exit 1
+    echo "Error while starting service"
+    exit 1
   fi
   echo -e ":::::::: Installing done ::::::::"
 }
 
 spinner()
 {
-    local pid=$!
-    local delay=0.75
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
+  local pid=$!
+  local delay=0.75
+  local spinstr='|/-\'
+  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+    local temp=${spinstr#?}
+    printf " [%c]  " "$spinstr"
+    local spinstr=$temp${spinstr%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+  printf "    \b\b\b\b"
 }
 
 #Copy service config and application
+echo -e ":::::::: Cross Check Installer ::::::::" && sleep 1
 
 if [ $1 == "mysql" ]; then
   echo -e ":::::::: Cross Check MYSQL Installing started ::::::::" && sleep 1
@@ -102,6 +103,5 @@ elif [ $1 == "remove" ]; then
   echo -e ":::::::: Cross Check Uninstalling ::::::::" && sleep 1
   remove
 else
-  echo -e "Please select an argument. (mysql, pgsql, update, delete)" && exit 1
+  echo -e "Please select an argument. (mysql, pgsql, update, delete)\nExample: ./install.sh mysql" && exit 1
 fi
-
